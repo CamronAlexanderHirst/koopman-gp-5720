@@ -1,12 +1,13 @@
 using Revise
 using ToeplitzMatrices
+using Plots
 include("easygpkoopman.jl")
 
 # 1-dim
 f1d(x;) = 0.9*x + 1.5cos.(x)
     
 x0 = 0.5
-n = 30
+n = 21
 ndim = length(x0)
 Xm = zeros(ndim, n)       # Trajectory in the state space
 
@@ -25,9 +26,10 @@ plt1
 # # Define observable priors and find the Hankel matrices
 f1(x) = x
 m = 11 
-order = m 
+order_des = m
+order = min(order_des, n-m+1) # Don't choose an order too large
 
-K1, Ur1, gps1 = GPKoopman.gp_koopman_estimate(f1, Xm, m, order, )
+K1, Ur1, gps1 = GPKoopman.gp_koopman_estimate(f1d, Xm, m, order, )
 
 # Try it out at xt
 bidx = 0 

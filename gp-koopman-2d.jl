@@ -1,5 +1,8 @@
 using Revise
 using ToeplitzMatrices
+using Plots
+using StatsPlots
+using LinearAlgebra
 include("easygpkoopman.jl")
 
 # 2-dim
@@ -14,8 +17,7 @@ Xm = zeros(ndim, n)       # Trajectory in the state space
 
 xs = -2.1:0.2:2.1
 ys = -1.1:0.2:1.1
-using LinearAlgebra
-using Plots
+
 df(x, y) = normalize(f([x,y]))/10.
 xxs = [x for x in xs for y in ys]
 yys = [y for x in xs for y in ys]
@@ -73,5 +75,4 @@ end
 
 plt
 # plt1
-
 # 
